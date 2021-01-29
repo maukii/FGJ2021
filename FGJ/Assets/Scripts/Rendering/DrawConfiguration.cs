@@ -1,0 +1,68 @@
+﻿using UnityEngine;
+
+public class DrawConfiguration : MonoBehaviour
+{
+    public float pointRadius = 5;
+    public bool renderCircles = false;
+    public bool screenSize = true;
+
+    private Camera renderCamera = null;
+    private Material material;
+
+
+    private void LoadShaders()
+    {
+        if (screenSize)
+            material = new Material(Shader.Find("Custom/QuadGeoScreenSizeShader"));
+        else
+            material = new Material(Shader.Find("Custom/QuadGeoWorldSizeShader"));
+
+        material.SetFloat("_PointSize", pointRadius);
+        material.SetInt("_Circles", renderCircles ? 1 : 0);
+    }
+
+    public void Awake()
+    {
+        renderCamera = Camera.main;
+        LoadShaders();
+    }
+
+    public void Update()
+    {
+        if (screenSize)
+        {
+            Rect screen = renderCamera.pixelRect;
+            material.SetInt("_ScreenWidth", (int)screen.width);
+            material.SetInt("_ScreenHeight", (int)screen.height);
+        }
+    }
+
+    public GameObject CreateGameObject(string name, Vector3[] vertexData, Color[] colorData, Transform parent)
+    {
+        GameObject go = new GameObject(name);
+        go.transform.SetParent(parent);
+        MeshFilter filter = go.AddComponent<MeshFilter>();
+        Mesh mesh = filter.mesh = new Mesh();
+        MeshRenderer renderer = go.AddComponent<MeshRenderer>();
+        renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        renderer.receiveShadows = false;
+        renderer.material = material;
+
+        int[] indecies = new int[vertexData.Length];
+        for (int i = 0; i < vertexData.Length; i++)
+        {
+            indecies[i] = i;
+        }
+
+        mesh.vertices = vertexData;
+        mesh.colors = colorData;
+        mesh.SetIndices(indecies, MeshTopology.Points, 0);
+
+        return go;
+    }
+
+    public int GetMaximumPointsPerMesh()
+    {
+        return 65000;
+    }
+}
