@@ -31,13 +31,7 @@ public class DrawPointMesh : MonoBehaviour
         if (filter == null)
             filter = GetComponentInChildren<MeshFilter>();
 
-        Vector3[] vertices = filter.sharedMesh.vertices;
-        for (int i = 0; i < vertices.Length; i++)
-        {
-            vertices[i] += transform.position;
-        }
-
-        return vertices;
+        return filter.sharedMesh.vertices;
     }
 
     private Color[] GetColorsFromMesh()

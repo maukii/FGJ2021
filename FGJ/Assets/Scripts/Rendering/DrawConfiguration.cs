@@ -40,7 +40,7 @@ public class DrawConfiguration : MonoBehaviour
     public GameObject CreateGameObject(string name, Vector3[] vertexData, Color[] colorData, Transform parent)
     {
         GameObject go = new GameObject(name);
-        go.transform.SetParent(parent);
+        go.transform.SetParent(parent, false);
         MeshFilter filter = go.AddComponent<MeshFilter>();
         Mesh mesh = filter.mesh = new Mesh();
         MeshRenderer renderer = go.AddComponent<MeshRenderer>();
