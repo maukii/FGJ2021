@@ -2,12 +2,12 @@
 
 public class DrawConfiguration : MonoBehaviour
 {
-    public float pointRadius = 5;
-    public bool renderCircles = false;
-    public bool screenSize = true;
+    public float pointRadius = 0.075f;
+    public bool renderCircles = true;
+    public bool screenSize = false;
 
     private Camera renderCamera = null;
-    private Material material;
+    private Material material = null;
 
 
     private void LoadShaders()
