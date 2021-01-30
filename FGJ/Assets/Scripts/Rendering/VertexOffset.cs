@@ -5,8 +5,8 @@ public class VertexOffset : MonoBehaviour
     [SerializeField] private Vector3 scale = Vector3.one;
     private bool init = false;
     private MeshFilter filt;
-    private Vector3[] originalVertices;
-
+    private Vector3[] originalVertices;    
+    private Mesh mesh;
 
 
     private void OnValidate()
@@ -18,6 +18,17 @@ public class VertexOffset : MonoBehaviour
                 filt = GetComponentInChildren<MeshFilter>();
 
             originalVertices = filt.sharedMesh.vertices;
+            mesh = new Mesh();
+            mesh.vertices = filt.sharedMesh.vertices;
+            mesh.normals = filt.sharedMesh.normals;
+            mesh.colors = filt.sharedMesh.colors;
+            int[] indices = new int[mesh.vertices.Length];
+            for (int i = 0; i < indices.Length; i++)
+            {
+                indices[i] = i;
+            }
+
+            mesh.SetIndices(indices, MeshTopology.Points, 0);
             init = true;
         }
 
@@ -27,7 +38,8 @@ public class VertexOffset : MonoBehaviour
             vertices[i] = originalVertices[i] + Vector3.Scale(filt.sharedMesh.normals[i], scale);
         }
 
-        filt.sharedMesh.vertices = vertices;
+        mesh.vertices = vertices;
+        filt.sharedMesh = mesh;
     }
 
     private void OnDisable()
