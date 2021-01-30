@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb900872df8e664ca141e4194ecfe4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  randSizeScalar: 0.01
   pointRadius: 0.06
   renderCircles: 1
   screenSize: 0
@@ -60,6 +61,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec8af0a344db91449b44367653008c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorRandomizing: 0.01
+  over65000Vertices: 0
   hideOriginalModel: 1
 --- !u!1 &5433736080183699554
 GameObject:
