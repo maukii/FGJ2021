@@ -184,6 +184,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0ffb4d01fb1b2448860cd36b484ac78, type: 3}
+--- !u!21 &318194186
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Custom/QuadGeoWorldSizeShader
+  m_Shader: {fileID: 4800000, guid: 32d511a3ab1898a44957b98239e7608a, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Floats:
+    - _Circles: 0
+    - _PointSize: 5
+    - _RandSize: 0.1
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1001 &376912455
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -346,7 +371,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 674717548}
-  - component: {fileID: 674717547}
   - component: {fileID: 674717546}
   m_Layer: 0
   m_Name: Stone
@@ -364,25 +388,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 674717545}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ec8af0a344db91449b44367653008c8, type: 3}
+  m_Script: {fileID: 11500000, guid: 67c49c94675bd764cb168308f577ca34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorRandomizing: 0
-  over65000Vertices: 0
-  hideOriginalModel: 1
---- !u!114 &674717547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 674717545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cb900872df8e664ca141e4194ecfe4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  randSizeScalar: 0
+  rend: {fileID: 1506346658}
+  randSizeScalar: 0.1
   pointRadius: 0.075
   renderCircles: 1
   screenSize: 0
@@ -594,12 +604,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f0ffb4d01fb1b2448860cd36b484ac78, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 318194186}
     - target: {fileID: 919132149155446097, guid: f0ffb4d01fb1b2448860cd36b484ac78, type: 3}
       propertyPath: m_Name
       value: Model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0ffb4d01fb1b2448860cd36b484ac78, type: 3}
+--- !u!23 &1506346658 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: f0ffb4d01fb1b2448860cd36b484ac78, type: 3}
+  m_PrefabInstance: {fileID: 1506346657}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1515886278 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f0ffb4d01fb1b2448860cd36b484ac78, type: 3}
