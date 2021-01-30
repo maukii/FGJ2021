@@ -4,11 +4,11 @@
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerControllerSettings settings;
+    [SerializeField] private Camera cam;
 
     private CharacterController controller = null;
     private PlayerInput input = null;
     private Transform cameraTransform;
-    private Camera cam = null;
     private float xRotation = 0f;
 
 
@@ -16,11 +16,6 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         input = GetComponent<PlayerInput>();
-        cam = GetComponentInChildren<Camera>();
-        if (cam == null)
-            CreateCamera();
-
-        cam.transform.position = new Vector3(0, controller.height, 0);
         cameraTransform = cam.transform;
 
         if (settings.lockCursor)

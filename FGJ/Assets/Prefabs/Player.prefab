@@ -88,6 +88,7 @@ MonoBehaviour:
     walkSpeed: 750
     runSpeed: 1500
     sprintKey: 304
+  cam: {fileID: 2923355324238051187}
 --- !u!114 &2923355324117073652
 MonoBehaviour:
   m_ObjectHideFlags: 0
