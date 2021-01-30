@@ -7,6 +7,7 @@
 	*/
 	Properties
 	{
+		_RandSize("Rand size scalar", Float) = 0.1
 		_PointSize("Point Size", Float) = 5
 		[Toggle] _Circles("Circles", Int) = 0
 	}
@@ -14,7 +15,6 @@
 	SubShader
 	{
 		LOD 200
-
 		Pass
 		{
 			Cull off
@@ -23,6 +23,7 @@
 			#pragma vertex vert
 			#pragma geometry geom
 			#pragma fragment frag
+			#include "Common.hlsl"
 
 			struct VertexInput
 			{
@@ -45,19 +46,22 @@
 				float2 uv : TEXCOORD0;
 			};
 
+			float _RandSize;
 			float _PointSize;
 			int _Circles;
 
 			VertexMiddle vert(VertexInput v) 
 			{
+				float rand = random(v.position.xyz) * _RandSize;
+
 				VertexMiddle o;
 				o.position = v.position;
 				o.color = v.color;
 				float3 view = normalize(UNITY_MATRIX_IT_MV[2].xyz);
 				float3 upvec = normalize(UNITY_MATRIX_IT_MV[1].xyz);
 				float3 R = normalize(cross(view, upvec));
-				o.U = float4(upvec * _PointSize, 0);
-				o.R = float4(R * _PointSize, 0);
+				o.U = float4(upvec * (_PointSize + rand), 0);
+				o.R = float4(R * (_PointSize + rand), 0);
 				return o;
 			}
 
