@@ -1,6 +1,4 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-Shader "Custom/QuadGeoScreenSizeShader"
+﻿Shader "Custom/QuadGeoScreenSizeShader"
 {
 	/*
 	This shader renders the given vertices as circles with the given color.
@@ -9,6 +7,7 @@ Shader "Custom/QuadGeoScreenSizeShader"
 	*/
 	Properties
 	{
+		_RandSize("Rand size scalar", Float) = 0.1
 		_PointSize("Point Size", Float) = 5
 		_ScreenWidth("Screen Width", Int) = 0
 		_ScreenHeight("Screen Height", Int) = 0
@@ -18,7 +17,6 @@ Shader "Custom/QuadGeoScreenSizeShader"
 	SubShader
 	{
 		LOD 200
-
 		Pass
 		{
 			Cull off
@@ -27,6 +25,7 @@ Shader "Custom/QuadGeoScreenSizeShader"
 			#pragma vertex vert
 			#pragma geometry geom
 			#pragma fragment frag
+			#include "Common.hlsl"
 
 			struct VertexInput
 			{
@@ -35,9 +34,10 @@ Shader "Custom/QuadGeoScreenSizeShader"
 			};
 
 			struct VertexMiddle 
-			{
+			{				
 				float4 position : SV_POSITION;
 				float4 color : COLOR;
+				float rand : TEXCOORD0;
 			};
 
 			struct VertexOutput
@@ -47,6 +47,7 @@ Shader "Custom/QuadGeoScreenSizeShader"
 				float2 uv : TEXCOORD0;
 			};
 
+			float _RandSize;
 			float _PointSize;
 			int _ScreenWidth;
 			int _ScreenHeight;
@@ -54,17 +55,20 @@ Shader "Custom/QuadGeoScreenSizeShader"
 
 			VertexMiddle vert(VertexInput v) 
 			{
+				float rand = random(v.position.xyz) * _RandSize;
+
 				VertexMiddle o;
 				o.position = UnityObjectToClipPos(v.position);
 				o.color = v.color;
+				o.rand = rand;
 				return o;
 			}
 
 			[maxvertexcount(4)]
 			void geom(point VertexMiddle input[1], inout TriangleStream<VertexOutput> outputStream) 
 			{
-				float xsize = _PointSize / _ScreenWidth;
-				float ysize = _PointSize / _ScreenHeight;
+				float xsize = (_PointSize + input[0].rand) / _ScreenWidth;
+				float ysize = (_PointSize + input[0].rand) / _ScreenHeight;
 				VertexOutput out1;
 				out1.position = input[0].position;
 				out1.color = input[0].color;
