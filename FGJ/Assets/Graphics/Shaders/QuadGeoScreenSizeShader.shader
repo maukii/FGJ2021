@@ -7,11 +7,11 @@
 	*/
 	Properties
 	{
-		_RandSize("Rand size scalar", Float) = 0.1
-		_PointSize("Point Size", Float) = 5
-		_ScreenWidth("Screen Width", Int) = 0
-		_ScreenHeight("Screen Height", Int) = 0
-		[Toggle] _Circles("Circles", Int) = 0
+		[PerRendererData] _RandSize("Rand size scalar", Float) = 0.1
+		[PerRendererData] _PointSize("Point Size", Float) = 5
+		[PerRendererData] _ScreenWidth("Screen Width", Int) = 0
+		[PerRendererData] _ScreenHeight("Screen Height", Int) = 0
+		[PerRendererData] [Toggle] _Circles("Circles", Int) = 0
 	}
 
 	SubShader
