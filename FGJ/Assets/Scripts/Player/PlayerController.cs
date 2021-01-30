@@ -25,13 +25,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void CreateCamera()
-    {
-        GameObject cameraObject = new GameObject("CameraObject", typeof(Camera));
-        cameraObject.transform.SetParent(transform);
-        cam = cameraObject.GetComponent<Camera>();
-    }
-
     private void Update()
     {
         bool sprint = Input.GetKey(settings.sprintKey);
