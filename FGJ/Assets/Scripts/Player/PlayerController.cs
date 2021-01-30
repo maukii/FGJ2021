@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private float runStepDelay = 0.4f;
     public AudioClip[] footSteps;
 
+    bool playerIsLocked = false;
+
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -26,17 +28,34 @@ public class PlayerController : MonoBehaviour
 
         if (settings.lockCursor)
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            LockPlayer();
         }
+    }
+
+    public void LockPlayer()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        playerIsLocked = true;
+    }
+    
+    public void ReleasePlayer()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        playerIsLocked = false;
     }
 
     private void Update()
     {
-        bool sprint = Input.GetKey(settings.sprintKey);
+        if (!playerIsLocked)
+        {
+            bool sprint = Input.GetKey(settings.sprintKey);
 
-        Move(sprint);
-        Look();
+            Move(sprint);
+            Look();
+        }
+
     }
 
     private void Move(bool sprint)
