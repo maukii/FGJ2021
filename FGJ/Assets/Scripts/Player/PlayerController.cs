@@ -4,18 +4,24 @@
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerControllerSettings settings;
-    [SerializeField] private Camera cam;
+    [SerializeField] private Camera cam = null;
 
     private CharacterController controller = null;
     private PlayerInput input = null;
     private Transform cameraTransform;
     private float xRotation = 0f;
 
+    private AudioSource audioSource;
+    private float nextFootstep = 1f;
+    private float footStepDelay = 0.6f;
+    private float runStepDelay = 0.4f;
+    public AudioClip[] footSteps;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         input = GetComponent<PlayerInput>();
+        audioSource = GetComponent<AudioSource>();
         cameraTransform = cam.transform;
 
         if (settings.lockCursor)
@@ -38,6 +44,16 @@ public class PlayerController : MonoBehaviour
         Vector2 inputDirection = input.InputDirection;
         Vector3 direction = transform.forward * inputDirection.y + transform.right * inputDirection.x;
         controller.SimpleMove(direction * (!sprint ? settings.walkSpeed : settings.runSpeed) * Time.deltaTime);
+        
+        if (nextFootstep <= 0 && controller.velocity.magnitude > 0.5f)
+        {
+            audioSource.PlayOneShot(footSteps[Random.Range(0, footSteps.Length)], 0.7f);
+            nextFootstep += (!sprint ? footStepDelay : runStepDelay);   
+        }
+        if (controller.velocity.magnitude > 0.1f)
+        {
+            nextFootstep -= Time.deltaTime;        
+        }
     }
 
     private void Look()
