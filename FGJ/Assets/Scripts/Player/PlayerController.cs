@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioSource;
     private float nextFootstep = 1f;
     private float footStepDelay = 0.6f;
-    private float runStepDelay = 0.4f;
+    private float runStepDelay = 0.3f;
     public AudioClip[] footSteps;
 
     bool playerIsLocked = false;
