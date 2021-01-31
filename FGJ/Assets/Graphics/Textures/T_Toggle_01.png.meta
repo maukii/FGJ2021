@@ -1,7 +1,13 @@
 fileFormatVersion: 2
 guid: 7bd6892271f2d7b4dbfaeebb0e8c8038
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 1416257378709086117
+    second: T_Toggle_01_0
+  - first:
+      213: -5132748971465318301
+    second: T_Toggle_01_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -87,11 +93,53 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: T_Toggle_01_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5af1b70159e87a310800000000000000
+      internalID: 1416257378709086117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T_Toggle_01_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 360ee824100d4c8b0800000000000000
+      internalID: -5132748971465318301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c9d55d1442c041f409c84a98b2893110
     internalID: 0
     vertices: []
     indices: 
