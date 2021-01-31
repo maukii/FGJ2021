@@ -6,6 +6,7 @@ public class GameplayManager : MonoBehaviour
 {
     public GameObject levelOne;
     private LevelTransition[] levelOneTransitions;
+    public  PlayerController player;
     public GameObject mainMenu;
     void Start()
     {
@@ -17,6 +18,14 @@ public class GameplayManager : MonoBehaviour
         for (int i = 0; i < levelOneTransitions.Length; i++)
         {
             levelOneTransitions[i].ShowMe();
+        }
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 }
