@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     private PlayerInput input = null;
     private Transform cameraTransform;
     private float xRotation = 0f;
-    private Rigidbody rb;
 
     private AudioSource audioSource;
     private float nextFootstep = 1f;
@@ -26,7 +25,6 @@ public class PlayerController : MonoBehaviour
         input = GetComponent<PlayerInput>();
         audioSource = GetComponent<AudioSource>();
         cameraTransform = cam.transform;
-        rb = GetComponent<Rigidbody>();
 
         if (settings.lockCursor)
         {
@@ -39,7 +37,6 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         playerIsLocked = true;
-        rb.useGravity = false;
         controller.enabled = false;
     }
     
@@ -48,7 +45,6 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         playerIsLocked = false;
-        rb.useGravity = true;
         controller.enabled = true;
     }
 
